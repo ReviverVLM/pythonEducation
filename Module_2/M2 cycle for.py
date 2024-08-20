@@ -17,7 +17,7 @@ not_primes = []
 for i in range(numbers.__len__()):
     if numbers[i] == 1:
         continue
-    elif numbers[i] == 2 or numbers[i] == 3:    # or numbers[i] == 5 or numbers[i] == 7 для большого массива
+    elif numbers[i] == 2:   # or numbers[i] == 3 or numbers[i] == 5 or numbers[i] == 7 для большого массива
         primes.append(numbers[i])
     else:
         for j in range(2, numbers[i]):
