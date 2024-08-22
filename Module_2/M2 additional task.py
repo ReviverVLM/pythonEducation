@@ -43,6 +43,17 @@ def check_dublet(list_of_values, value):             # Функция прове
     return result                                    # Возвращаем результат поисков(Да? Да Нет? Нет)
 
 
+def form_list(forming_list_depth2):                             # Преобразование конечного списка для вывода
+    result_list = []                                            # Не очень красивого, но так по заданию надо
+    string_result_list = ""
+    for i in range(forming_list_depth2.__len__()):              # Здесь формируется красивый список
+        for j in range(forming_list_depth2[i].__len__()):
+            result_list.append(forming_list_depth2[i][j])
+    for i in range(result_list.__len__()):                      # Здесь формируется не особо читаемый, но сложный пароль
+        string_result_list += str(result_list[i])
+    return string_result_list
+
+
 def pass_gen(n, max_value):
     result = []
     my_list = generate_list_of_numbers(max_value)
@@ -61,11 +72,17 @@ def pass_gen(n, max_value):
                 if result.__len__() == 0:
                     result.append([number_main_cycle, number_insider_cycle])
                     continue
-                if check_dublet(result, pair):
+                elif check_dublet(result, pair):
                     continue
                 else:
                     result.append([number_main_cycle, number_insider_cycle])
     return result    # result
 
 
-print(*(pass_gen(15, 20)))
+# super_list = str(form_list(pass_gen(15, 20)))
+print(form_list(pass_gen(15, 20)))
+# print(1214114232133124115106978)
+"""
+Первый код, который пришлось закомментировать, чтобы самому понимать, что тут происходит.
+Случайные закомментированные куски кода пока остаются тут на всякий случай, но они вряд ли понадобятся 
+"""
