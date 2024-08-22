@@ -24,7 +24,7 @@ my_dict.update({"Нин Гуан": "26 августа", "Саю": "19 октяб
 print(my_dict.pop("Чжун Ли"))
 print(my_dict)
 
-my_set = {31, 1, 20, 31, "Miku", 26, 39, 8, 8, "Miku"}
+my_set = {31, 1, 20, 31, "Miku", 26, 39, 8, 8, "Miku"}  # значение не может быть списком
 print(my_set)
 my_set.update(["Мейко", 7])
 my_set.discard(8)
