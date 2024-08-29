@@ -17,8 +17,17 @@ def get_multiplied_digits(number):  # Незабываемая рекурсия
 print(get_multiplied_digits(21264))
 """
 Можно решить данное задание и через строку с выдёргиванием последнего элемента,
-но это долго, муторно и не совсем оптимально
+но это менее понятно для меня(но менее плохой, чем я ожидал)
 """
-# def get_multiplied_digits_other_way(number):
-#     str_number = str(number)
-#     print(str_number.pop())
+
+
+def get_multiplied_digits_other_way(number):
+    str_number = str(number)
+    first = int(str_number[0])
+    if len(str_number) > 1:
+        return first * get_multiplied_digits_other_way(int(str_number[1:]))
+    else:
+        return first
+
+
+print(get_multiplied_digits_other_way(200016204))
