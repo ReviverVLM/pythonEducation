@@ -25,3 +25,38 @@ print(result)
 99
 """
 
+
+def dict_to_list(argument):
+    dict_list = []
+    for key in argument:
+        dict_list.append(key)
+        dict_list.append(argument[key])
+    return dict_list
+
+
+print(dict_to_list({'cube': 7, 'drum': 8}))
+
+
+def sum_of_computer_types(*args):
+    result = 0
+    for argument in args:
+        if isinstance(argument, tuple | list | set):
+            result += sum_of_computer_types(*argument)
+        elif isinstance(argument, dict):
+            result += sum_of_computer_types(dict_to_list(argument))
+        elif isinstance(argument, int):
+            result += argument
+        elif isinstance(argument, str):
+            result += len(argument)
+    return result
+
+
+data_structure = [
+[1, 2, 3],
+{'a': 4, 'b': 5},
+(6, {'cube': 7, 'drum': 8}),
+"Hello",
+((), [{(2, 'Urban', ('Urban2', 35))}])
+]
+print(sum_of_computer_types([1, 2, 2], [2, 3]))
+print(sum_of_computer_types(*data_structure))
