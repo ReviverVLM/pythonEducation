@@ -43,7 +43,9 @@ print(result)
  
  Вкратце isinstance(argument.items(), object) == True. Это итерируемый объект
  
- Дополнение: ошибка не выдаётся, но пропускается
+ Дополнение: ошибка не выдаётся, но пропускаются все словари, так как без предварительной распаковки
+ они считаются объектами, а их обработка в функции не предусмотрена. Можно передать объект, но тогда
+ будет ошибка TypeError: __main__.sum_of_computer_types() argument after * must be an iterable, not int
 """
 
 
@@ -58,6 +60,8 @@ def sum_of_computer_types(*args):
             result += argument
         elif isinstance(argument, str):
             result += len(argument)
+        # elif isinstance(argument, object):                    # Непонятно как обработать объект
+        #     result += sum_of_computer_types(*argument)        # Проще распаковать данные словаря, а объекты не трогать
     return result
 
 
@@ -68,5 +72,5 @@ data_structure = [
     "Hello",
     ((), [{(2, 'Urban', ('Urban2', 35))}])
 ]
-# print(sum_of_computer_types([1, 2, 2], [2, 3]))
+print(sum_of_computer_types([1, 2, 2], [2, 3]))
 print(sum_of_computer_types(*data_structure))
