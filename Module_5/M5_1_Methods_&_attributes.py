@@ -22,7 +22,7 @@ class House:
             for floor in range(new_floor):
                 time.sleep(1)
                 # if new_floor == floor + 1:        # Если не надо, чтобы загорался
-                #     break                         # последний элемент(этаж)
+                #     break                         # последний элемент(этаж) 
                 print(floor + 1)
             print(f"Вы приехали на {new_floor} этаж")
         else:
