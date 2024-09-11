@@ -21,8 +21,8 @@ class House:
         elif self.number_of_floors >= new_floor > 1:
             for floor in range(new_floor):
                 time.sleep(1)
-                # if new_floor == floor + 1:
-                #     break
+                # if new_floor == floor + 1:        # Если не надо, чтобы загорался
+                #     break                         # последний элемент(этаж)
                 print(floor + 1)
             print(f"Вы приехали на {new_floor} этаж")
         else:
