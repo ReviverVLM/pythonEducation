@@ -7,6 +7,13 @@ self.name - имя, self.number_of_floors - кол-во этажей
 Метод go_to выводит на экран(в консоль) значения от 1 до new_floor(включительно).
 Если же new_floor больше чем self.number_of_floors или меньше 1, то вывести строку "Такого этажа не существует".
 """
+
+"""
+Update: Второе задание в том же файле
+Необходимо дополнить класс House следующими специальными методами:
+__len__(self) - должен возвращать кол-во этажей здания self.number_of_floors.
+__str__(self) - должен возвращать строку: "Название: <название>, кол-во этажей: <этажи>".
+"""
 import time
 
 
@@ -15,6 +22,12 @@ class House:
         self.name = name
         self.number_of_floors = number_of_floors
 
+    def __len__(self):
+        return self.number_of_floors
+
+    def __str__(self):
+        return f"Название: {self.name}, кол-во этажей: {self.number_of_floors}"
+
     def go_to(self, new_floor):
         if new_floor == 1:
             print("Вы уже на этом этаже")
@@ -22,7 +35,7 @@ class House:
             for floor in range(new_floor):
                 time.sleep(1)
                 # if new_floor == floor + 1:        # Если не надо, чтобы загорался
-                #     break                         # последний элемент(этаж) 
+                #     break                         # последний элемент(этаж)
                 print(floor + 1)
             print(f"Вы приехали на {new_floor} этаж")
         else:
@@ -39,7 +52,19 @@ h2 = House('Домик в деревне', 2)
 h1.go_to(5)
 h2.go_to(10)
 
-want_on_floor = 10
+want_on_floor = 2
 village.go_to(want_on_floor)
 urban.go_to(want_on_floor)
 village.go_to(want_on_floor)
+
+
+h1 = House('ЖК Эльбрус', 10)
+h2 = House('ЖК Акация', 20)
+
+# __str__
+print(h1)
+print(h2)
+
+# __len__
+print(len(h1))
+print(len(h2))
