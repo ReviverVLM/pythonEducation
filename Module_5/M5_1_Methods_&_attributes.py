@@ -19,7 +19,11 @@ class House:
         if new_floor == 1:
             print("Вы уже на этом этаже")
         elif self.number_of_floors >= new_floor > 1:
-            time.sleep(new_floor)
+            for floor in range(new_floor):
+                time.sleep(1)
+                # if new_floor == floor + 1:
+                #     break
+                print(floor + 1)
             print(f"Вы приехали на {new_floor} этаж")
         else:
             print("Такого этажа не существует или введены некоректные данные, попробуйте ещё раз")
@@ -30,6 +34,10 @@ urban = House("Городская многоэтажка", 10)
 
 print(village.name, village.number_of_floors)
 print(urban.name, urban.number_of_floors)
+h1 = House('ЖК Горский', 18)
+h2 = House('Домик в деревне', 2)
+h1.go_to(5)
+h2.go_to(10)
 
 want_on_floor = 10
 village.go_to(want_on_floor)
