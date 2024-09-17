@@ -34,8 +34,31 @@ isinstance(other, int) - other указывает на объект типа int
 isinstance(other, House) - other указывает на объект типа House.
 """
 
+"""
+Update: Четвёртое задание в том же файле
+В классе House создайте атрибут houses_history = [], который будет хранить названия созданных объектов.
+
+Правильней вписывать здание в историю сразу при создании объекта, тем более можно удобно обращаться к атрибутам класса
+используя ссылку на сам класс - cls.
+Дополните метод __new__ так, чтобы:
+    - Название объекта добавлялось в список cls.houses_history.
+    - Название строения можно взять из args по индексу.
+
+Также переопределите метод __del__(self) в котором будет выводиться строка:
+"<название> снесён, но он останется в истории"
+
+Создайте несколько объектов класса House и проверьте работу методов __del__ и __new__,
+а также значение атрибута houses_history.
+"""
+
 
 class House:
+    houses_history = []
+
+    def __new__(cls, name, *args, **kwargs):
+        cls.houses_history.append(name)
+        return object.__new__(cls)
+
     def __init__(self, name, number_of_floors):
         self.name = name
         self.number_of_floors = number_of_floors
@@ -110,14 +133,18 @@ class House:
         else:
             print("Такого этажа не существует или введены некоректные данные, попробуйте ещё раз")
 
+    def __del__(self):
+        print(f"{self.name} снесён, но он останется в истории")
 
-village = House("Дача", 3)
-urban = House("Городская многоэтажка", 10)
 
-print(village.name, village.number_of_floors)
-print(urban.name, urban.number_of_floors)
-# h1 = House('ЖК Горский', 18)
-# h2 = House('Домик в деревне', 2)
+# village = House("Дача", 3)
+# urban = House("Городская многоэтажка", 10)
+#
+# #
+# print(village.name, village.number_of_floors)
+# print(urban.name, urban.number_of_floors)
+# # h1 = House('ЖК Горский', 18)
+# # h2 = House('Домик в деревне', 2)
 # h1.go_to(5)
 # h2.go_to(10)
 #
@@ -126,46 +153,60 @@ print(urban.name, urban.number_of_floors)
 # urban.go_to(want_on_floor)
 # village.go_to(want_on_floor)
 
+#
+# h1 = House('ЖК Эльбрус', 10)
+# h2 = House('ЖК Акация', 20)
+#
+# # __str__
+# print(h1)
+# print(h2)
+#
+# # __len__
+# print(len(h1))
+# print(len(h2))
+# """"""
+# urban = 2 + urban
+# print(urban)
+# village += 1
+#
+# village = village + 6
+# print(village)
+# print("----------")
+# """"""
+# h1 = House('ЖК Эльбрус', 10)
+# h2 = House('ЖК Акация', 20)
+#
+# print(h1)
+# print(h2)
+#
+# print(h1 == h2) # __eq__
+#
+# h1 = h1 + 10 # __add__
+# print(h1)
+# print(h1 == h2)
+#
+# h1 += 10 # __iadd__
+# print(h1)
+#
+# h2 = 10 + h2 # __radd__
+# print(h2)
+#
+# print(h1 > h2) # __gt__
+# print(h1 >= h2) # __ge__
+# print(h1 < h2) # __lt__
+# print(h1 <= h2) # __le__
+# print(h1 != h2) # __ne__
 
-h1 = House('ЖК Эльбрус', 10)
-h2 = House('ЖК Акация', 20)
-
-# __str__
-print(h1)
-print(h2)
-
-# __len__
-print(len(h1))
-print(len(h2))
 """"""
-urban = 2 + urban
-print(urban)
-village += 1
-
-village = village + 6
-print(village)
-print("----------")
-""""""
 h1 = House('ЖК Эльбрус', 10)
+print(House.houses_history)
 h2 = House('ЖК Акация', 20)
+print(House.houses_history)
+h3 = House('ЖК Матрёшки', 20)
+print(House.houses_history)
 
-print(h1)
-print(h2)
+# Удаление объектов
+del h2
+del h3
 
-print(h1 == h2) # __eq__
-
-h1 = h1 + 10 # __add__
-print(h1)
-print(h1 == h2)
-
-h1 += 10 # __iadd__
-print(h1)
-
-h2 = 10 + h2 # __radd__
-print(h2)
-
-print(h1 > h2) # __gt__
-print(h1 >= h2) # __ge__
-print(h1 < h2) # __lt__
-print(h1 <= h2) # __le__
-print(h1 != h2) # __ne__
+print(House.houses_history)
