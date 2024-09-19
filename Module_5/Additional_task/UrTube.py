@@ -6,7 +6,7 @@ class UrTube:
     """
     Каждый объект класса UrTube должен обладать следующими атрибутами и методами:
 
-     Атриубты: users(список объектов User), videos(список объектов Video), current_user(текущий пользователь, User)
+     Атрибуты: users(список объектов User), videos(список объектов Video), current_user(текущий пользователь, User)
 
     - Метод log_in, который принимает на вход аргументы: nickname, password и пытается найти пользователя в users
     с такими же логином и паролем. Если такой пользователь существует,
@@ -87,24 +87,33 @@ class UrTube:
         if self.current_user is not None:
             self.current_user = None
 
-    def add_video(self, other):
+    def add_videos(self, *videos):
+        for video in videos:
+            if isinstance(video, Video):
+                self.videos.append(video)
 
-    def watch_video(self):
 
-    def get_videos(self):
-
+    # def watch_video(self):
+    #
+    # def get_videos(self):
 
 
 if __name__ == '__main__':
     ytube = UrTube()
-    ytube.register('vasya_pupkin', 'lolkekcheburek', 13)
-    ytube.register('Miku', 'lolkekcheburek', 16)
-    ytube.register('vasya_pupkin', 'lolkekcheburek', 113)
-    ytube.register('Kaito', 'lolkekcheburek', 133)
-    ytube.register('Kaito', 'lolkekcheburek', 13)
-    ytube.log_in('vasya_pupkin', 'lolkekcheburek')
-    ytube.log_in('Miku', '3939')
-    ytube.log_in('vasya_pupkin', 'lolkek')
-    ytube.log_in('Kaito', 'lolkekcheburek')
-    ytube.log_in('Kaito', 'lolkekcheburek')
-    print(0)
+    # ytube.register('vasya_pupkin', 'lolkekcheburek', 13)
+    # ytube.register('Miku', 'lolkekcheburek', 16)
+    # ytube.register('vasya_pupkin', 'lolkekcheburek', 113)
+    # ytube.register('Kaito', 'lolkekcheburek', 133)
+    # ytube.register('Kaito', 'lolkekcheburek', 13)
+    # ytube.log_in('vasya_pupkin', 'lolkekcheburek')
+    # ytube.log_in('Miku', '3939')
+    # ytube.log_in('vasya_pupkin', 'lolkek')
+    # ytube.log_in('Kaito', 'lolkekcheburek')
+    # ytube.log_in('Kaito', 'lolkekcheburek')
+    v1 = Video('Лучший язык программирования 2024 года', 200)
+    v2 = Video('Для чего девушкам парень программист?', 10, adult_mode=True)
+    v3 = Video("RRes", 234, 60)
+    obmanka = User('vasya_pupkin', 'lolkekcheburek', 13)
+    ytube.add_videos(v1, v2, v3, obmanka)
+    for vid in ytube.videos:
+        print(vid.title)
