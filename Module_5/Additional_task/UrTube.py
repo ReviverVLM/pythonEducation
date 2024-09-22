@@ -36,7 +36,7 @@ class UrTube:
     к объекту класса из-за того, что он фактически не будет использоваться
     
     """
-    users = {}
+    users = {}  # Ключ ник, значение объект
     videos = []
     current_user = None
 
@@ -58,11 +58,13 @@ class UrTube:
         #     else:
         #         continue
         if nickname not in self.users:
-            user = nickname     # Сохраняем значение ника во временную переменную
-            nickname = User(user, password, age)    # Создаём класс, уникальность даёт ник, который проверяется выше
-            self.users[user] = nickname     # Добавляем в словарь пару ключ ник, значение объект
+            user = nickname  # Сохраняем значение ника во временную переменную
+            nickname = User(user, password, age)  # Создаём класс, уникальность даёт ник, который проверяется выше
+            self.users[user] = nickname  # Добавляем в словарь пару ключ ник, значение объект
+            return self.log_in(user, password)
         else:
             print(f"Пользователь {nickname} уже существует, если это вы используйте другой метод")
+            return None
 
     def log_in(self, user, password):
         if self.current_user != user:
@@ -88,20 +90,49 @@ class UrTube:
             self.current_user = None
 
     def add_videos(self, *videos):
+        """Добавление видео. Проверки на авторизацию пользователя и премодерацию видео нетЪ"""
         for video in videos:
             if isinstance(video, Video):
                 self.videos.append(video)
 
+    def get_videos(self, search):
+        searching_videos = []
+        for movie in self.videos:
+            if search.lower() in movie.title.lower():
+                """Проверка на возраст вместо """
+                if self.current_user is None or self.users[self.current_user].age <= 18:
+                    if movie.adult_mode:
+                        continue
+                    else:
+                        searching_videos.append(movie.title)
+                else:
+                    searching_videos.append(movie.title)
 
-    # def watch_video(self):
-    #
-    # def get_videos(self):
+        return searching_videos
+
+    def watch_video(self, video, current_video_time=0):
+        if self.current_user is None:
+            return print('Для просмотра требуется авторизация на сайте')
+
+        import time
+        for movie in self.videos:
+            if video == movie.title:
+                if movie.adult_mode and self.users[self.current_user].age <= 18:
+                    return print('Ваш возраст не соответствует нормам санэпидемстанции, '
+                                 'пожалуйста пройдите в комнату без интернета на сутки')
+                movie.time_now = current_video_time
+                while movie.time_now != movie.duration:
+                    movie.time_now += 1
+                    time.sleep(1)
+                    print(movie.time_now)
+                movie.time_now = 0
+                return print("Поставьте лайк и подпишитесь на канал...а не то вам хуже будет(наверное)")
 
 
 if __name__ == '__main__':
     ytube = UrTube()
     # ytube.register('vasya_pupkin', 'lolkekcheburek', 13)
-    # ytube.register('Miku', 'lolkekcheburek', 16)
+    ytube.register('Miku', 'lolkekcheburek', 16)
     # ytube.register('vasya_pupkin', 'lolkekcheburek', 113)
     # ytube.register('Kaito', 'lolkekcheburek', 133)
     # ytube.register('Kaito', 'lolkekcheburek', 13)
@@ -116,4 +147,6 @@ if __name__ == '__main__':
     obmanka = User('vasya_pupkin', 'lolkekcheburek', 13)
     ytube.add_videos(v1, v2, v3, obmanka)
     for vid in ytube.videos:
-        print(vid.title)
+        print(vid)
+    print(*ytube.get_videos("грам"))
+    ytube.watch_video("Для чего девушкам парень программист?")
