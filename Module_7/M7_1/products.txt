@@ -1,0 +1,3 @@
+Potato, вес 50.5, Vegetables
+Spaghetti, вес 3.4, Groceries
+Potato, вес 5.5, Vegetables
