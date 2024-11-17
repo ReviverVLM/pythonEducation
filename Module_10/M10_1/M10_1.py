@@ -32,10 +32,15 @@ def write_words(word_count, file_name):
     return 0
 
 
+start_time_func = time.time()
+
 write_words(10, "example1.txt")
 write_words(30, "example2.txt")
 write_words(200, "example3.txt")
 write_words(100, "example4.txt")
+
+end_time_func = time.time() - start_time_func
+print(end_time_func)
 
 thread1 = threading.Thread(target=write_words, args=(10, "example5.txt"))
 thread2 = threading.Thread(target=write_words, args=(30, "example6.txt"))
@@ -44,8 +49,13 @@ thread4 = threading.Thread(target=write_words, args=(100, "example8.txt"))
 
 threads = [thread1, thread2, thread3, thread4]
 
+start_time_threads = time.time()
+
 for thread in threads:
     thread.start()
 
 for thread in threads:
     thread.join()
+
+end_time_threads = time.time() - start_time_threads
+print(end_time_threads)
