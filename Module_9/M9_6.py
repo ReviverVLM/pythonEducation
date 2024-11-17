@@ -4,7 +4,7 @@
 """
 
 
-def sorted_all_variants(text):
+def all_variants(text):
     start = 0
     end = 1
     counter = 1
@@ -18,6 +18,6 @@ def sorted_all_variants(text):
             end = counter
 
 
-result = sorted_all_variants("abcd")
+result = all_variants("abcd")
 for char in result:
     print(char)
