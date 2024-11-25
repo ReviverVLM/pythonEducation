@@ -47,3 +47,4 @@ if __name__ == '__main__':
     with multiprocessing.Pool(processes=48) as pool:
         print(pool.map(read_info, files))
 print(time.time() - start_time_multi)
+
